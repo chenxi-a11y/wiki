@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>辰兮Wiki</title>
+  <link rel="icon" href="_media/favicon.ico" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify/themes/vue.css">
+</head>
+<body>
+  <div id="app">Loading ...</div>
+  <script>
+  // Docsify configuration
+      window.$docsify = {
+          // 文档标题
+        name: '<h2>辰兮 Wiki</h2>',
+        //点击文档标题后跳转的链接地址/这里点击后跳转到首页
+        nameLink: '/',
+        //切换页面后是否自动跳转到页面顶部
+        auto2top: true,
+         // 封面支持，默认加载的是项目根目录下的_coverpage.md文件
+        //coverpage: true,
+        executeScript: true,
+        // 侧边栏支持，默认加载的是项目根目录下的_sidebar.md文件
+        loadSidebar: true,
+        // 导航栏支持，默认加载的是项目根目录下的_navbar.md文件
+        loadNavbar: true,
+        mergeNavbar: true,
+        // 最大支持渲染的标题层级
+        maxLevel: 5,
+         // 自定义侧边栏后默认不会再生成目录，设置生成目录的最大层级，建议配置为1或者2
+        subMaxLevel: 5,
+        
+        search: {
+  paths: 'auto',
+  placeholder: '搜索',
+  noData: '没有结果',
+  depth: 6,
+},
+
+pagination: {
+  previousText: '上一章节',
+  nextText: '下一章节',
+}
+
+  }
+</script>
+
+<!-- 滚动到页面顶部 -->
+<script>
+// 配置图标URL
+const IMAGE_URL = {
+    'arrow-up-1': 'https://unpkg.com/@zhg-x/resources@1.0.0/assets/images/arrow-up-1.png',
+    'arrow-up-2': 'https://unpkg.com/@zhg-x/resources@1.0.0/assets/images/arrow-up-2.png',
+};
+const CONFIG = {
+    auto: true,
+    text: 'Top',
+    icon: 'arrow-up-1',
+    right: 15,
+    bottom: 15,
+    width: 50,
+    height: 40,
+    offset: 500
+};
+
+const pluginFunction = function (hook, vm) {
+    let options = {};
+    if (Object.prototype.toString.call(vm.config.scrollToTop) === '[object Object]') {
+        const opts = vm.config.scrollToTop;
+        options.auto = typeof opts.auto === 'boolean' ? opts.auto : CONFIG.auto;
+        options.text = opts.text && typeof opts.text === 'string' ? opts.text : '';
+        options.icon = opts.icon && typeof opts.icon === 'string' ? opts.icon : '';
+        // 若文本项和图标项都没有配置，则使用默认配置中的文本文字
+        if (!options.text && !options.icon) {
+            options.text = CONFIG.text;
+        }
+        options.right = opts.right && typeof opts.right === 'number' ? opts.right : CONFIG.right;
+        options.bottom = opts.bottom && typeof opts.bottom === 'number' ? opts.bottom : CONFIG.bottom;
+        options.width = opts.width && typeof opts.width === 'number' ? opts.width : CONFIG.width;
+        options.height = opts.height && typeof opts.height === 'number' ? opts.height : CONFIG.height;
+        options.offset = opts.offset && typeof opts.offset === 'number' ? opts.offset : CONFIG.offset;
+    } else {
+        options = CONFIG;
+    }
+    const onScroll = function () {
+        if (!options.auto) {
+            return;
+        }
+        const offset = window.document.documentElement.scrollTop;
+        const $scrollBtn = Docsify.dom.find('div.scroll-to-top');
+        $scrollBtn.style.display = offset >= options.offset ? "block" : "none";
+    };
+
+    hook.mounted(function () {
+        const scrollBtn = document.createElement('div'); // 创建元素节点
+        scrollBtn.className = 'scroll-to-top';
+        scrollBtn.style.display = options.auto ? 'none' : 'block';
+        scrollBtn.style.overflow = 'hidden';
+        scrollBtn.style.position = 'fixed';
+        scrollBtn.style.right = options.right + 'px';
+        scrollBtn.style.bottom = options.bottom + 'px';
+        scrollBtn.style.width = options.width + 'px';
+        scrollBtn.style.height = options.height + 'px';
+        scrollBtn.style.lineHeight = options.height + 'px';
+        scrollBtn.style.background = 'white';
+        scrollBtn.style.color = '#666';
+        scrollBtn.style.border = '1px solid #ddd';
+        scrollBtn.style.borderRadius = '4px';
+        scrollBtn.style.fontSize = '16px';
+        scrollBtn.style.textAlign = 'center';
+        scrollBtn.style.boxShadow = '0px 0px 6px #eee';
+        scrollBtn.style.cursor = 'pointer';
+
+        let contentTag;
+        if (options.text) {
+            contentTag = document.createTextNode(options.text); // 创建文本节点
+        } else {
+            contentTag = document.createElement('img');
+            contentTag.style.height = '40px';
+            contentTag.src = IMAGE_URL[options.icon];
+        }
+        scrollBtn.appendChild(contentTag);
+        document.body.appendChild(scrollBtn);
+        window.addEventListener('scroll', onScroll);
+        scrollBtn.onclick = function (e) {
+            e.stopPropagation();
+            const step = 50;
+            const timer = setInterval(function () {
+                const diff = window.scrollY - step;
+                if (diff > 0) {
+                    window.scrollTo(0, window.scrollY - step);
+                } else {
+                    window.scrollTo(0, 0);
+                    clearInterval(timer);
+                }
+            });
+        };
+    });
+};
+
+if ($docsify.plugins && Array.isArray($docsify.plugins)) {
+    $docsify.plugins.push(pluginFunction);
+} else {
+    $docsify.plugins = [pluginFunction];
+}
+</script>
+  <!-- 在文档的最下方会展示上一个文档和下一个文档 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-pagination/dist/docsify-pagination.min.js"></script>
+    <!-- 复制到剪贴板 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+    <!-- 外链脚本 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/external-script.min.js"></script>
+    <!-- emoji表情支持 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/emoji.min.js"></script>
+    <!-- 图片放大缩小支持 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+    <!-- 搜索功能支持 -->
+    <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+
+  <!-- Docsify v4 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+</body>
+</html>
