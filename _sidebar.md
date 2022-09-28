@@ -6,3 +6,4 @@
   * [XrayR](XrayR/)
   * [Markdown 相关](Markdown/)
   * [免流热点分享教程](rd/)
+  * [魔法上网软件下载](xz/)
