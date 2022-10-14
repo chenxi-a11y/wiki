@@ -4,7 +4,7 @@
 
 [下载](https://github.com/zzzgydi/clash-verge)zh-CN.msi的安装文件<br>首次安装打开可能报错，需要下载运行库啥的，根据提示安装就行<br>**汉化：**打开软件 → Settings → Language→ 选择中文
 
-<img src="tp/Verge.tp/hh.png" style="zoom:50%;" />
+![image-20221014223403876](tp/Verge.tp/hh.png)
 
 ## 2.配置
 
@@ -33,28 +33,28 @@ proxies:
 
 **导入刚刚创建的配置 并选择导入配置**
 
-<img src="tp/Verge.tp/xj.png" style="zoom:50%;" />
+![image-20221014223403876](tp/Verge.tp/xj.png)
 
-<img src="tp/Verge.tp/lx.png" style="zoom:50%;" />
+![image-20221014223403876](tp/Verge.tp/lx.png)
 
-<img src="tp/Verge.tp/xz.png" style="zoom:50%;" />
+![image-20221014223403876](tp/Verge.tp/xz.png)
 
 ## 3.启动
 
 **点击 代理 - 全局 - 选择刚刚的节点，也就是SOCKS5**
 
-<img src="tp/Verge.tp/qd1.png" style="zoom:50%;" />
+![image-20221014223403876](tp/Verge.tp/qd1.png)
 
 **切换内核**
 
-<img src="tp/Verge.tp/qd2.png" style="zoom:50%;" />
+![image-20221014223403876](tp/Verge.tp/qd2.png)
 
 **设置系统代理规则**
 
-<img src="tp/Verge.tp/qd3.png" style="zoom:50%;" />
+![image-20221014223403876](tp/Verge.tp/qd3.png)
 
-<img src="tp/Verge.tp/qd4.png" style="zoom:50%;" />
+![image-20221014223403876](tp/Verge.tp/qd4.png)
 
 **最后启动**
 
-<img src="tp/Verge.tp/qd6.png" style="zoom:50%;" />
+![image-20221014223403876](tp/Verge.tp/qd6.png)
