@@ -83,6 +83,28 @@ sh init.sh
 
 ![image-20220925135359628](tp/README.tp/image-20220925135359628.png)
 
+### 备份
+
+> 如果作者删库，我这里备份了一个（如果服务器下载慢，可以用电脑下载再上传）
+
+```shell
+git clone https://github.com/MrJiang1106/v2board.git ./
+```
+
+ 依赖下载
+
+```shell
+wget https://getcomposer.org/download/1.9.0/composer.phar
+php composer.phar config repo.packagist composer https://mirrors.aliyun.com/composer/
+php composer.phar install
+```
+
+ 安装V2Board面板
+
+```shell
+php artisan v2board:install
+```
+
 ## 6.配置站点目录及伪静态
 
 6.1添加完成后编辑添加的站点 > 网站目录 > 运行目录 选择 /public 保存。
@@ -111,9 +133,9 @@ location ~ .*\.(js|css)?$
 
 计划任务
 
-> 在 任务类型 选择 Shell脚本
-> 在 任务名称 填写 v2board
-> 在 执行周期 选择 N分钟 1
+> 在 任务类型 选择 Shell脚本   
+> 在 任务名称 填写 v2board    
+> 在 执行周期 选择 N分钟 1   
 > 在 脚本内容 填写 php /www/wwwroot/网站域名/artisan schedule:run
 
 根据上述信息添加每1分钟执行一次的定时任务。
@@ -126,9 +148,11 @@ V2board的系统强依赖队列服务，正常使用V2Board必须启动队列服
 
 找到 Supervisor管理器 进行安装，安装完成后点击 `设置 > 添加守护进程 `按照如下填写
 
-> 在 名称 填写 V2board
-> 在 启动用户 选择 www
-> 在 运行目录 选择 站点目录 在 启动命令 填写 php artisan horizon 在 进程数量 填写 1
+> 在 名称 填写 V2board   
+> 在 启动用户 选择 www   
+> 在 运行目录 选择 站点目录 (/www/wwwroot/网站/)   
+> 在 启动命令 填写 php artisan horizon  
+> 在 进程数量 填写 1
 
 填写后点击 确定 添加即可运行。
 
