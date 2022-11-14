@@ -15,9 +15,9 @@
   * [更新升级](V2Board/gfsy11)
   * <font color="#1E90FF">其他使用说明</font>
 
- * [__节点安装__](V2Board/jdaz)
-  * [__V2Board简易使用方法__](V2Board/jy)
+  * [__XrayR节点安装__](V2Board/jdaz)
   * [__V2Board面板 v2ray后端节点对接教程 soga脚本配置方法__](V2Board/dj)
+  * [__V2Board简易使用方法__](V2Board/jy)
   * [__项目地址__](https://github.com/v2board/v2board)
   * [__官方教程__](https://docs.v2board.com/)
   * [退出]()

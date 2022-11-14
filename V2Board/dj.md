@@ -54,110 +54,95 @@ websocket传输协议——编辑配置
 
 ![image-20220925141037699](tp/dj.tp/image-20220925141037699.png)
 
-# 2.后端工作：
+**到系统配置这里，点服务端-通讯密钥这里，输入自己要设置的通讯密钥，下面对接会用的到**
 
-## 首先创建一台服务器
+![image-20221114134838303](tp/dj.tp/image-20221114134838303.png)
 
-![image-20220925141112154](tp/dj.tp/image-20220925141112154.png)
+## 4.soga后端部署
 
-等待几分钟后，去防火墙规则里开端口，这里以Azure为例：
+以下是后端节点对接部署
 
-![image-20220925141136868](tp/dj.tp/image-20220925141136868.png)
-
-## SSH登录服务器
-
-Azure因为禁用了root用户名直接登录，所以需要提权，如是以root用户登录服务器的请忽略此步骤。
-
-用普通权限用户登陆
-
-输入
+debian系统,先执行
 
 ```
-sudo passwd root
+apt-get update
+apt-get install curl -y
 ```
 
-输入一次普通用户的密码，再设置一个root密码两次（提示弱密码不用管）
-
-切换root用户
+一键安装&更新
 
 ```
-su
+bash <(curl -Ls https://blog.sprov.xyz/soga.sh)
 ```
 
-输入刚刚设置的密码，成功提权
+或者，下面这个，中两个都可以用
 
-![image-20220925141237129](tp/dj.tp/image-20220925141237129.png)
+```
+bash <(curl -Ls https://raw.githubusercontent.com/sprov065/soga/master/install.sh)
+```
 
-## 安装soga主程序
+同步时间
 
-一键安装，安装完成不要着急启动，查看后面的教程进行对接
+v2ray 节点需要进行时间同步，时间若与客户端相差太大则无法连接
 
+CentOS 
 
+```
+yum install -y ntp
+systemctl enable ntpd
+ntpdate -q 0.rhel.pool.ntp.org
+systemctl restart ntpd
+```
 
-![image-20220925141438487](tp/dj.tp/image-20220925141438487.png)
+Debian / Ubuntu
 
-输入 1 回车
+```
+apt-get install -y ntp
+systemctl enable ntp
+systemctl restart ntp
+```
 
-![image-20220925141515766](tp/dj.tp/image-20220925141515766.png)
+## 5.配置soga
 
-安装完成
-
-## 配置soga
-
-这里以Xftp为例，其他软件同
-
-打开Xftp，新建连接：
-
-![image-20220925141538422](tp/dj.tp/image-20220925141538422.png)
-
-打开 /etc/soga/soga.conf 文件
-
-![image-20220925141559615](tp/dj.tp/image-20220925141559615.png)
+```
+vi /etc/soga/soga.conf
+```
 
 下面是详细的配置参数，可以根据下面参考对应修改
 
 ```
-type=v2board                           # 必填这个(填写)
-server_type=v2ray                      # 必填这个(填写)
-node_id=8                              # 填面板添加节点对应的的ID号(填写)
-soga_key=                              # 授权key，社区版无需填写，最多支持88用户，商业版无限制(不填写)
- 
-# webapi 或 db 对接任选一个
-api=webapi                             # webapi 或 db，表示 webapi 对接或数据库对接(填写webapi)
- 
-# webapi 对接信息
-webapi_url=https://www.xxxx.com/       # 这里是填对接的面板地址(填写)
-webapi_mukey=xxxxxx                    # 这里是V2board面板与服务端通讯密钥(填写)
- 
-# db 对接信息
-db_host=db.xxxx.com                    # 数据库地址(不填写)        
-db_port=3306                           # 数据库端口(不填写)
-db_name=123                            # 数据库名(不填写)
-db_user=123                            # 数据库用户名(不填写)
-db_password=123456                     # 数据库密码(不填写)
- 
- 
-# 手动证书配置
-cert_file=                             # 这里是用到tls,使用申请证书的域名  （如不使用tls，这行可以删除不用） 
-key_file=                              # 这里是用到tls,使用申请证书的域名  （如不使用tls，这行可以删除不用）
- 
-cert_domain=x5.test.com                # 这里是用到tls,使用申请证书的域名  （如不使用tls，这行可以删除不用）
-cert_mode=http                         # 申请模式   （如不使用tls，这行可以删除不用）
-cert_key_length=ec-256                 # 留空则申请RSA证书，填写ec-256或ec-384则申请ECC证书（如不使用tls，这行可以删除不用）
- 
-user_conn_limit=0                      # 限制用户连接数，0代表无限制，v2board 必填！！！ (保持默认)
-user_speed_limit=0                     # 用户限速，0代表无限制，单位 Mbps，v2board 必填！！！(保持默认)
-check_interval=100                     # 同步前端用户、上报服务器信息等间隔时间（秒），近似值(保持默认)
- 
-force_close_ssl=false                  # 设为true可强制关闭tls，即使前端开启tls，soga也不会开启tls，方便用户自行使用nginx、caddy等反代(保持默认)
-forbidden_bit_torrent=true             # 设为true可禁用bt下载(保持默认)
- 
-default_dns=8.8.8.8,1.1.1.1            # 配置默认dns，可在此配置流媒体解锁的dns，以逗号分隔(保持默认)
+# 请按照对应教程进行配置：https://github.com/sprov065/soga/wiki
+type=v2board                            # 必填这个
+server_type=v2ray                   # 必填这个
+api=webapi                                # webapi 或 db，表示 webapi 对接或数据库对接
+
+webapi_url=https://www.xxxx.com/          # 这里是填对接的面板地址
+webapi_mukey=xxxxxx                      # 这里是V2board面板与服务端通讯的密钥
+
+db_host=db.xxxx.com        # 数据库地址         
+db_port=3306                         # 数据库端口
+db_name=123                        # 数据库名
+db_user=123                           # 数据库用户名
+db_password=123456    # 数据库密码
+
+node_id=8                        # 填面板添加节点对应的的ID号
+soga_key=                        # 授权key，社区版无需填写，最多支持88用户，商业版无限制
+
+cert_domain=x5.test.com          # 这里是用到tls,使用申请证书的域名  （如不使用tls，这行可以删除不用）
+cert_mode=http                           # 申请模式   （如不使用tls，这行可以删除不用）
+cert_key_length=ec-256            # 留空则申请RSA证书，填写ec-256或ec-384则申请ECC证书（如不使用tls，这行可以删除不用）
+
+user_conn_limit=0                  # 限制用户连接数，0代表无限制，v2board 必填！！！ 
+user_speed_limit=0                # 用户限速，0代表无限制，单位 Mbps，v2board 必填！！！
+check_interval=100               # 同步前端用户、上报服务器信息等间隔时间（秒），近似值
+
+force_close_ssl=false          # 设为true可强制关闭tls，即使前端开启tls，soga也不会开启tls，方便用户自行使用nginx、caddy等反代
+forbidden_bit_torrent=true       # 设为true可禁用bt下载
+
+default_dns=8.8.8.8,1.1.1.1           # 配置默认dns，可在此配置流媒体解锁的dns，以逗号分隔
 ```
 
-按Ctrl + S保存，会自动上传
-
-## 启动后端
+## 6.启动后端
 
 最后启动soga，输入soga回车，可以去管理脚本里看启动状态
 
@@ -165,17 +150,13 @@ default_dns=8.8.8.8,1.1.1.1            # 配置默认dns，可在此配置流媒
 soga start
 ```
 
-![image-20220925141701758](tp/dj.tp/image-20220925141701758.png)
+![image-20221114135024767](tp/dj.tp/image-20221114135024767.png)
 
-去面板看看是否对接成功
+**最后我们看面板里的亮点蓝色就是正常对接成功**
 
-![image-20220925141739101](tp/dj.tp/image-20220925141739101.png)
+![image-20221114135101695](tp/dj.tp/image-20221114135101695.png)
 
-打开显隐，节点显示黄色说明对接已经成功（红色：未连接、黄色：未通信、绿色：正在通讯），因为没有用户连接，所以是已对接未通讯状态。
-
-
-
-## soga管理命令
+## 7.soga管理命令
 
 ```
 soga - 显示管理菜单 (功能更多)
@@ -190,5 +171,3 @@ soga update - 更新 soga
 soga install - 安装 soga
 soga uninstall - 卸载 soga
 ```
-
-至此，soga后端对接V2Board完成，后续更新V2Board正确使用方法，拜拜ヾ(•ω•`)o
