@@ -14,9 +14,35 @@
 
 在右键菜单中选择 “在此处打开 PowerShell 窗口” 或 “在此处打开命令窗口”，这将在当前路径下打开一个新的 PowerShell 窗口。
 
+推荐 22 款好用的 CLI 工具 [https://zhuanlan.zhihu.com/p/266032071](https://zhuanlan.zhihu.com/p/266032071)
+
 ![img](./tp/README.tp/v2-19bb543e3c630041ce4f6623080f36eb_720w.webp)
 
 
+
+**3.power shell“因为在此系统上禁止运行脚本”解决办法**
+
+遇到了如下的问题。
+
+> nrm : 无法加载文件 C:\Users\11190\AppData\Roaming\npm\nrm.ps1，因为在此系统上禁止运行脚本。
+
+![img](./tp/README.tp/v2-15867761d0618599271045d3cd2fc838_720w.png)
+
+处理方案在提示中有，可以通过访问链接查看：https:\[go.microsoft.com](https://link.zhihu.com/?target=http%3A//go.microsoft.com)\fwlink\?LinkID=135170
+
+核心是power shell的安全策略，将 nrm 命令视为了不安全脚本，不允许执行。只需要放开权限就行。
+
+我们通过管理员权限运行power shell，然后输入命令
+
+```text
+ set-ExecutionPolicy RemoteSigned
+```
+
+![img](./tp/README.tp/v2-9e4bb9af3b778d0d91ce7bdb4eacbdca_720w.webp)
+
+选择“是”，就OK了。
+
+## 开始
 
 ## 安装docsify
 
