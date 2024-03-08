@@ -4,6 +4,8 @@
 
 配套后端：https://github.com/cedar2025/hysteria
 
+
+
 Xboard后台添加节点，节点IP填服务器的公网IP、节点地址填写域名、连接端口和服务端口保持一致、协议版本选择v2：
 
 [![img](./tp/README.tp/lala.im_2024-02-25_17-05-00.png)](https://lala.im/wp-content/uploads/2024/02/lala.im_2024-02-25_17-05-00.png)
