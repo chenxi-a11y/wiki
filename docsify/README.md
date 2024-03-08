@@ -1,6 +1,26 @@
+## 提示
+
+**1.Typora**
+
+打开设置  打开自动保存   
+
+再点击 图片  在这插入图片时 选择复制到指定路径  填入
+
+./tp/${filename}.tp
+
+**2.PowerShell**
+
+在文件夹的空白区域中按住 “Shift” 键，并同时右键单击文件夹的空白区域。
+
+在右键菜单中选择 “在此处打开 PowerShell 窗口” 或 “在此处打开命令窗口”，这将在当前路径下打开一个新的 PowerShell 窗口。
+
+![img](./tp/README.tp/v2-19bb543e3c630041ce4f6623080f36eb_720w.webp)
+
+
+
 ## 安装docsify
 
-`docsify`是一个`Node.js`插件，所以需要提前安装[Node.js](https://nodejs.org/)。安装完毕后，通过下面命令全局安装`docsify`。
+`docsify`是一个`Node.js`插件，所以需要提前安装[Node.js](https://nodejs.org/)。安装完毕后，打开管理员权限运行power shell 推荐全局安装`docsify-cli` 工具，可以方便地创建及在本地预览生成的文档。。
 
 ```bash
 npm i docsify-cli -g
