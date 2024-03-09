@@ -193,6 +193,14 @@ certbot certonly
 
 把我们etc里的文件进行修改，然后上传到服务器对应目录
 
+```
+#赋予执行权限
+chmod +x /usr/local/bin/hysteria-linux-amd64
+
+#重新加载systemctl daemon
+systemctl daemon-reload
+```
+
 启动并设置开机自启：
 
 ```
