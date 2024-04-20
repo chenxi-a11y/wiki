@@ -16,3 +16,5 @@
   * [vps增加IPv6地址](ipv6/)
   * [hysteria](hysteria/)
   * [FullTClash](FullTClash/)
+  * [Cloudflare](Cloudflare/)
+  * [杂七杂八](qt/)
