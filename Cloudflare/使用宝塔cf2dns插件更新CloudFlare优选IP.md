@@ -66,6 +66,8 @@ IPV6&IPV4：同时开启IPV6&IPV4支持将会请求2次接口消耗双倍积分�
 
 华为云可用地区区域代码 https://developer.huaweicloud.com/endpoint?DNS
 
+https://developer.huaweicloud.com/endpoint?IAM
+
 阿里云可用地区区域代码
 https://help.aliyun.com/document_detail/2355662.html?spm=a2c4g.2355663.0.0.6a5e1e84twtIER
 
