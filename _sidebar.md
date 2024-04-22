@@ -17,4 +17,5 @@
   * [hysteria](hysteria/)
   * [FullTClash](FullTClash/)
   * [Cloudflare](Cloudflare/)
+  * [GoEdge](goedge/)
   * [杂七杂八](qt/)

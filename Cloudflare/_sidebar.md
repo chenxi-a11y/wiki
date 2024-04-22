@@ -10,7 +10,7 @@
   * [Cloudflare完全禁用IPv6](Cloudflare/Cloudflare完全禁用IPv6)
   * [CloudFlare SAAS(cname) 接入网站域名](Cloudflare/CloudFlareSAAS接入网站域名)
   * [IP优选](Cloudflare/IP优选)
-  * [](Cloudflare/)
+  * [使用宝塔cf2dns插件更新CloudFlare优选IP](Cloudflare/使用宝塔cf2dns插件更新CloudFlare优选IP)
   * [](Cloudflare/)
   * [](Cloudflare/)
   * [](Cloudflare/)
