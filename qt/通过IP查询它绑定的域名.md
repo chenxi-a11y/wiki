@@ -6,6 +6,13 @@
 
 输入查询的IP地址，获取IP绑定过的域名记录。
 
+```
+https://hunter.qianxin.com/
+https://www.qvdv.net/tools/qvdv-gethost.html
+https://fofa.info/
+https://search.censys.io/
+```
+
 ip138查询：
 
 ```
